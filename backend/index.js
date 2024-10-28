@@ -7,4 +7,9 @@ app.listen(PORT, () => {
     console.log(`app listening at ${PORT}`);
 });
 
-app.get("/")
+app.get('/', async(req, res) => {
+    console.log(req);
+    res.status(234).send("Hello")
+})
+
+
