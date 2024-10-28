@@ -1,5 +1,5 @@
 import express from "express";
-import { task } from "../models/taskmodel";
+import { task } from "../models/taskmodel.js";
 
 const Router = express.Router();
 
@@ -32,7 +32,7 @@ Router.post('/', async(req, res) => {
 Router.get('/', async(req, res) => {
     try{
         const Tasks = await task.find();
-        return res.status(500).json({
+        return res.status(200).json({
             count: Tasks.length,
             Tasks: Tasks
         })
@@ -90,3 +90,5 @@ Router.delete('/:id', async(req, res) => {
         res.status(500).send({message : error.message});
     }
 })
+
+export default Router;
