@@ -6,6 +6,8 @@ import DeleteTasks from './pages/DeleteTasks'
 import CreateTasks from './pages/CreateTasks'
 import EditTasks from './pages/EditTasks'
 import ShowTask from './pages/ShowTask'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
       <Route path='/Home/details/:id' element={<ShowTask/>}/>
       <Route path='/Home/create' element={<CreateTasks/>}/>
       <Route path='/Home/edit/:id' element={<EditTasks/>}/>
+      <Route path='/' element={<LoginPage/>}/>
+      <Route path='/register' element={<RegisterPage/>}/>
     </Routes>
   )
 }
