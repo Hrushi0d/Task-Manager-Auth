@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Details = ({ task, id }) => {
   return (
-    <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 p-6">
+    <div class="relative flex flex-col my-6 bg-white shadow-sm border mx-auto border-slate-200 rounded-lg w-96 p-6">
         <div className="flex items-center justify-between mb-4">
             <h5 className="ml-3 text-slate-800 text-xl font-semibold">
                 {task.title}

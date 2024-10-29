@@ -8,19 +8,19 @@ const TasksTable = ({ tasks }) => {
         <table class="w-full text-left table-auto min-w-max">
         <thead>
             <tr>
-            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100'>
+            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-500 text-white'>
                 <p className='"block text-sm font-normal leading-none text-slate-500"'>Title</p>
                 </th>
-            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100'>
+            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-500 text-white'>
                 <p className='"block text-sm font-normal leading-none text-slate-500"'>Description</p>
                 </th>
-            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100'>
+            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-500 text-white'>
                 <p className='"block text-sm font-normal leading-none text-slate-500"'>Status</p>
                 </th>
-            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100'>
+            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-500 text-white'>
                 <p className='"block text-sm font-normal leading-none text-slate-500"'>Priority</p>
                 </th>
-            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100'>
+            <th className='p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-500 text-white'>
                 <p className='"block text-sm font-normal leading-none text-slate-500"'></p>
                 </th>
             </tr>
