@@ -12,10 +12,10 @@ const App = () => {
   return (
     <Routes>
       <Route path='/Home' element={<Home/>}/>
-      <Route path='/deletetask' element={<DeleteTasks/>}/>
-      <Route path='/details' element={<ShowTask/>}/>
-      <Route path='/createtask' element={<CreateTasks/>}/>
-      <Route path='/edit' element={<EditTasks/>}/>
+      <Route path='/Home/delete/:id' element={<DeleteTasks/>}/>
+      <Route path='/Home/details/:id' element={<ShowTask/>}/>
+      <Route path='/Home/create' element={<CreateTasks/>}/>
+      <Route path='/Home/edit/:id' element={<EditTasks/>}/>
     </Routes>
   )
 }

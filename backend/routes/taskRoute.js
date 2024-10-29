@@ -34,7 +34,7 @@ Router.get('/', async(req, res) => {
         const Tasks = await task.find();
         return res.status(200).json({
             count: Tasks.length,
-            Tasks: Tasks
+            data: Tasks
         })
     }catch (error){
         console.log(error);
@@ -46,13 +46,15 @@ Router.get('/', async(req, res) => {
 Router.get('/:id', async(req, res) => {
     try{
         const {id} = req.params;
-        const Task = await task.findById({id});
-        return res.status(500).json(Task);
+        const Task = await task.findById(id);
+        return res.status(200).json(Task);
     }catch (error){
         console.log(error);
         res.status(500).send({message : error.message});
     }
 })
+
+
 
 // Update Task by id
 Router.put('/:id', async(req, res) => {

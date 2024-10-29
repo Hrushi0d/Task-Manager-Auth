@@ -6,6 +6,13 @@ import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
 
 mongoose.connect(MongoDBURL)
 .then(()=>{
@@ -14,12 +21,13 @@ mongoose.connect(MongoDBURL)
         console.log(`app listening at ${PORT}`);
     });
 })
-.catch(()=>{
-    console.log("App couldn't connect to Database");
-})
+.catch((error) => {
+  console.error("App couldn't connect to Database:", error);
+});
 
-app.use("/api/Tasks", taskRoute)
-app.use(cors());
+
+app.use("/api/tasks", taskRoute)
+
 
 app.get('/', async(req, res) => {
     console.log(req);
