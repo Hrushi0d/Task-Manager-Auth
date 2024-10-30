@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import TasksTable from '../components/TasksTable';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -92,6 +92,7 @@ const Home = () => {
             Create Tasks
           </button>                
         </Link>
+        
       </div>
 
         <TasksTable tasks={tasks} />

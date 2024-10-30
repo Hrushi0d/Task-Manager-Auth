@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import axios from 'axios';
 
 const RegisterPage = () => {
 
@@ -31,10 +32,10 @@ const RegisterPage = () => {
     }
 
   return (
-    <div className='p-4'>
+    <div className='p-4 '>
         <BackButton destination='/'/>
         {loading ? (<Loading/>):(
-            <div className='p-4'>
+            <div className='p-4 flex items-center justify-center h-screen'>
             <div className=' flex flex-col border-sky-300 rounded-xl w-[600px] p-4 mx-auto'>
                 <h1 class="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
                     Sign Up

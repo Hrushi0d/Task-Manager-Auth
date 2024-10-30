@@ -2,6 +2,7 @@ import express from "express";
 import {PORT, MongoDBURL} from './config.js';
 import mongoose from "mongoose";
 import taskRoute from "./routes/taskRoute.js";
+import registerRoute from './routes/registerRoute.js'
 import cors from 'cors';
 
 const app = express();
@@ -27,6 +28,7 @@ mongoose.connect(MongoDBURL)
 
 
 app.use("/api/tasks", taskRoute)
+app.use("/",registerRoute)
 
 
 app.get('/', async(req, res) => {
