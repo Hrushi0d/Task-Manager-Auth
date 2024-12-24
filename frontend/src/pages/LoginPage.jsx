@@ -14,7 +14,7 @@ const LoginPage = () => {
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         try{
-            const result = signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
             console.log("User signed in with Google:", result.user)
             navigate('/Home');
         }catch(error){
@@ -26,7 +26,7 @@ const LoginPage = () => {
     const handleGitHubSignIn = async () => {
         const provider = new GithubAuthProvider();
         try {
-            const result = signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
             console.log("User signed in with GitHub:", result.user);
             navigate('/Home');
         } catch (error) {
