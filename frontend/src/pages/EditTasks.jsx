@@ -3,12 +3,14 @@ import BackButton from '../components/BackButton'
 import Loading from '../components/Loading';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { doc, getDoc, setDoc , updateDoc} from 'firebase/firestore';
+import { db } from '../../firebase.config';
 
 const EditTasks = () => {
 
 
   const [loading, setLoading] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('Hola');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('pending');
   const [priority, setPriority] = useState('medium');
@@ -16,38 +18,51 @@ const EditTasks = () => {
   const {id} = useParams();
 
   useEffect(()=>{
-    setLoading(true)
-    axios.get(`http://localhost:5555/api/tasks/${id}`)
-      .then((response) => {
-        setTitle(response.data.title)
-        setDescription(response.data.description)
-        setPriority(response.data.priority)
-        setStatus(response.data.status)
+    const fetchTask = async () => {
+      setLoading(true);
+
+      try {
+        // Reference the Firestore document
+        const taskDocRef = doc(db, "Tasks", id);
+        const taskDoc = await getDoc(taskDocRef);
+
+        if (taskDoc.exists()) {
+          console.log(taskDoc.data().title);
+          setTitle(taskDoc.data().title)
+          setDescription(taskDoc.data().description)
+          setPriority(taskDoc.data().Priority)
+          setStatus(taskDoc.data().Status)
+        } else {
+          console.error("Task not found");
+          alert("Task not found");
+        }
+      } catch (error) {
+        console.error("Error fetching task:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        alert("Error fetching data:", error);
-        setLoading(false);
-      });
+      }}
+      
+    fetchTask();
   },[])
 
-  const handleEditTask = () => {
-    const data = {
-        title,
-        description,
-        status,
-        priority
-    };
+  const handleEditTask = async () => {
     setLoading(true)
-    axios.put(`http://localhost:5555/api/tasks/${id}`, data)
-    .then(()=>{
-      setLoading(false)
-      navigate('/Home')
-    }).catch((e)=>{
-      setLoading(false)
-      alert("An error occured")
-      console.log(e)
-    })
+    try {
+        // const taskRef = doc(db, "Tasks", id); // Replace 'id' with the document ID
+        // await updateDoc(taskRef, data);
+        await updateDoc(doc(db, "Tasks", id), {
+          title: title,
+          description: description,
+          Status: status,
+          Priority: priority 
+        });
+        setLoading(false);
+        navigate('/Home');
+    } catch (e) {
+        setLoading(false);
+        alert("An error occurred");
+        console.error(e);
+    }
 
   }
   return (

@@ -9,7 +9,6 @@ import ShowTask from './pages/ShowTask'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Page from './components/Page'
-import { auth } from '../firebase.config'
 
 
 const App = () => {

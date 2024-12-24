@@ -35,17 +35,17 @@ const TasksTable = ({ tasks }) => {
               </td>
               <td className="p-4 border-b border-slate-200 ">
                 <div class="w-max">
-                  {t.status === 'pending' ? (
+                  {t.Status === 'pending' ? (
                         <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                          <span span class="">{t.status}</span>
+                          <span span class="">{t.Status}</span>
                         </div>
-                    ) : t.status === 'in-progress' ? (
+                    ) : t.Status === 'in-progress' ? (
                       <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md select-none whitespace-nowrap bg-amber-500/20 text-amber-900">
-                        <span span class="">{t.status}</span>
+                        <span span class="">{t.Status}</span>
                       </div>
-                    ) : t.status === 'completed' ? (
+                    ) : t.Status === 'completed' ? (
                       <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                        <span span class="">{t.status}</span>
+                        <span span class="">{t.Status}</span>
                       </div>
                     ) : (
                         <span className="text-gray-500">Unknown Status</span>
@@ -54,32 +54,32 @@ const TasksTable = ({ tasks }) => {
               </td>
               <td className="p-4 border-b border-slate-200">
                 <div class="w-max">
-                  {t.priority === 'high' ? (
+                  {t.Priority === 'high' ? (
                         <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                          <span span class="">{t.priority}</span>
+                          <span span class="">{t.Priority}</span>
                         </div>
-                    ) : t.priority === 'medium' ? (
+                    ) : t.Priority === 'medium' ? (
                       <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md select-none whitespace-nowrap bg-amber-500/20 text-amber-900">
-                        <span span class="">{t.priority}</span>
+                        <span span class="">{t.Priority}</span>
                       </div>
-                    ) : t.priority === 'low' ? (
+                    ) : t.Priority === 'low' ? (
                       <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                        <span span class="">{t.priority}</span>
+                        <span span class="">{t.Priority}</span>
                       </div>
                     ) : (
-                        <span className="text-gray-500">Unknown Status</span>
+                        <span className="text-gray-500">Unknown Priority</span>
                     )}
                 </div>
               </td>
               <td className="p-4 border-b border-slate-200">
                 <div className="flex justify-between items-center">
-                  <Link to={`/Home/details/${t._id}`} className="text-sm text-slate-800">
+                  <Link to={`/Home/details/${t.id}`} className="text-sm text-slate-800">
                   <button class="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                     Show Details
                   </button>
                   </Link>
                   <div className="flex space-x-2">
-                    <Link to={`/Home/edit/${t._id}`}>
+                    <Link to={`/Home/edit/${t.id}`}>
                       <button
                         className="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-slate-900 transition-all hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button"
@@ -99,7 +99,7 @@ const TasksTable = ({ tasks }) => {
                       </button>                 
                     </Link>
 
-                    <Link to={`/Home/delete/${t._id}`}>
+                    <Link to={`/Home/delete/${t.id}`}>
                       <button
                         className="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-slate-900 transition-all hover:bg-red-500 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button"

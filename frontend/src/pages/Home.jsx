@@ -5,34 +5,64 @@ import Priorityfilter from '../components/Priorityfilter';
 import Statusfilter from '../components/Statusfilter';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
+import { db, auth } from '../../firebase.config';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const [statusfilter, setStatusFilter] = useState("All");
   const [priorityfilter, setPriorityFilter] = useState("All");
 
+
   useEffect(() => {
-    setLoading(true);
-    axios.get('http://localhost:5555/api/tasks')
-      .then((response) => {
-        let data = response.data.data;
-        data = statusfilter === "All" 
-        ? data 
-        : data.filter(task => task.status === statusfilter);
-        data = priorityfilter === "All" 
-        ? data 
-        : data.filter(task => task.priority === priorityfilter);
-        setTasks(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+    const fetchTasks = async () => {
+      setLoading(true);
+
+      try {
+        const user = auth.currentUser;
+        if (!user) {
+          console.warn("No user is signed in. Redirecting to /home.");
+          navigate("/");
+          return;
+        }
+        const userId = user.uid;
+        // Reference the Firestore collection
+        const tasksCollection = collection(db, "Tasks");
+        let q = query(tasksCollection, where("uid", "==", userId));
+        // Add Firestore filters based on `statusfilter` and `priorityfilter`
+        if (statusfilter !== "All") {
+          q = query(q, where("status", "==", statusfilter));
+        }
+        if (priorityfilter !== "All") {
+          q = query(q, where("priority", "==", priorityfilter));
+        }
+
+        // Fetch documents
+        const querySnapshot = await getDocs(q);
+
+        // Extract and set the tasks
+        const tasks = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setTasks(tasks);
+        console.log(tasks);
+      } catch (error) {
         console.error("Error fetching data:", error);
         setError("Could not fetch tasks. Please try again later.");
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchTasks();
   }, [statusfilter, priorityfilter]);
+
 
   const filteredTasks = statusfilter === "All" 
     ? tasks 

@@ -53,34 +53,34 @@ const Details = ({ task, id }) => {
                 </button>                 
             </Link>
             <div class="w-max">
-                {task.status === 'pending' ? (
+                {task.Status === 'pending' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                        <span span class="">{task.status}</span>
+                        <span span class="">{task.Status}</span>
                     </div>
-                ) : task.status === 'in-progress' ? (
+                ) : task.Status === 'in-progress' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md select-none whitespace-nowrap bg-amber-500/20 text-amber-900">
-                    <span span class="">{task.status}</span>
+                    <span span class="">{task.Status}</span>
                     </div>
-                ) : task.status === 'completed' ? (
+                ) : task.Status === 'completed' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                    <span span class="">{task.status}</span>
+                    <span span class="">{task.Status}</span>
                     </div>
                 ) : (
                     <span className="text-gray-500">Unknown Status</span>
                 )}
             </div>
             <div class="w-max">
-                {task.priority === 'high' ? (
+                {task.Priority === 'high' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                        <span span class="">{task.priority}</span>
+                        <span span class="">{task.Priority}</span>
                     </div>
-                ) : task.priority === 'medium' ? (
+                ) : task.Priority === 'medium' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md select-none whitespace-nowrap bg-amber-500/20 text-amber-900">
-                    <span span class="">{task.priority}</span>
+                    <span span class="">{task.Priority}</span>
                     </div>
-                ) : task.priority === 'low' ? (
+                ) : task.Priority === 'low' ? (
                     <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                    <span span class="">{task.priority}</span>
+                    <span span class="">{task.Priority}</span>
                     </div>
                 ) : (
                     <span className="text-gray-500">Unknown Status</span>

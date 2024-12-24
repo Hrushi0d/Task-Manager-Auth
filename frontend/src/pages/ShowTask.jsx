@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import BackButton from '../components/BackButton'
 import Loading from '../components/Loading';
 import Details from '../components/Details';
-import axios from 'axios';
+import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-
+import { db } from '../../firebase.config';
+ 
 const ShowTask = () => {
   const [task,settask] = useState({});
   const [loading,setloading] = useState(false);
@@ -12,17 +13,29 @@ const ShowTask = () => {
   const {id} = useParams();
 
   useEffect(() => {
-    setloading(true);
-    axios.get(`http://localhost:5555/api/tasks/${id}`)
-      .then((response) => {
-        settask(response.data);
+    const fetchTask = async () => {
+      setloading(true);
+
+      try {
+        // Reference the Firestore document
+        const taskDocRef = doc(db, "Tasks", id);
+        const taskDoc = await getDoc(taskDocRef);
+
+        if (taskDoc.exists()) {
+          // Set the task data
+          settask(taskDoc.data() );
+          console.log(taskDoc);
+        } else {
+          console.error("Task not found");
+          setError("Task not found.");
+        }
+      } catch (error) {
+        console.error("Error fetching task:", error);
+        setError("Could not fetch task. Please try again later.");
+      } finally {
         setloading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setError("Could not fetch tasks. Please try again later.");
-        setloading(false);
-      });
+      }}
+      fetchTask();
   }, []);
 
   return (

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import Loading from '../components/Loading';
-import axios from 'axios';
+import { db ,auth } from '../../firebase.config';
+import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const CreateTasks = () => {
@@ -13,22 +14,24 @@ const CreateTasks = () => {
   const [priority, setPriority] = useState('medium');
   const navigate = useNavigate();
 
-  const handleSaveTask = () => {
-    const data = {
-        title,
-        description,
-        status,
-        priority
-    };
-    axios.post('http://localhost:5555/api/tasks', data)
-    .then(()=>{
-      setLoading(false)
-      navigate('/Home')
-    }).catch((e)=>{
-      setLoading(false)
-      alert("An error occured")
-      console.log(e)
-    })
+  const handleSaveTask = async () => {
+    setLoading(true)
+        try {
+            await addDoc(collection(db, "Tasks"), {
+              title: title,
+              description: description,
+              Status: status,
+              Priority: priority,
+              uid: auth.currentUser.uid
+            });
+            setLoading(false);
+            navigate('/Home');
+        } catch (e) {
+            setLoading(false);
+            alert("An error occurred");
+            console.error(e);
+        }
+    
 
   }
 
