@@ -35,10 +35,10 @@ const Home = () => {
         let q = query(tasksCollection, where("uid", "==", userId));
         // Add Firestore filters based on `statusfilter` and `priorityfilter`
         if (statusfilter !== "All") {
-          q = query(q, where("status", "==", statusfilter));
+          q = query(q, where("Status", "==", statusfilter));
         }
         if (priorityfilter !== "All") {
-          q = query(q, where("priority", "==", priorityfilter));
+          q = query(q, where("Priority", "==", priorityfilter));
         }
 
         // Fetch documents
@@ -62,11 +62,6 @@ const Home = () => {
 
     fetchTasks();
   }, [statusfilter, priorityfilter]);
-
-
-  const filteredTasks = statusfilter === "All" 
-    ? tasks 
-    : tasks.filter(task => task.status === statusfilter);
 
   return (
     <div className="p-4">
