@@ -47,9 +47,3 @@ npm run dev
 - **Backend**: Firebase
 
 ---
-
-Feel free to contribute or raise issues for enhancements! 🎉
-
---- 
-
-Let me know if you need further edits or additions!
