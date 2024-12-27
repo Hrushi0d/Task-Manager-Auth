@@ -1,27 +1,55 @@
-## Simple Task Manger by Hrushi0d
+# **Simple Task Manager by Hrushi0d**
 
-For this project to function you need to create a firebase project and app and then Store your firebase SDK Keys into a .env file.
+A task management project that uses Firebase for backend services. Follow the instructions below to set up and run the project.
+
+---
+
+## **Setup Instructions**
+
+### **1. Firebase Configuration**
+- Create a Firebase project and app.
+- Store your Firebase SDK Keys in a `.env` file in the `frontend/` directory.
+
+#### Example `.env` File:
+```env
+VITE_API_KEY=
+VITE_AUTH_DOMAIN=
+VITE_PROJECT_ID=
+VITE_STORAGE_BUCKET=
+VITE_MESSAGING_SENDER_ID=
+VITE_APP_ID=
+VITE_MEASUREMENT_ID=
+```
+
+---
+
+### **2. Install Dependencies**
+Navigate to the `frontend/` folder and run:
 
 ```bash
-        VITE_API_KEY=
-        VITE_AUTH_DOMAIN=
-        VITE_PROJECT_ID=
-        VITE_STORAGE_BUCKET=
-        VITE_MESSAGING_SENDER_ID=
-        VITE_APP_ID=1:
-        VITE_MEASUREMENT_ID=
+cd frontend/
+npm install
+```
 
-        ```
+---
 
-After that you just need to install all the dependencies.
+### **3. Run the Project**
+To start the development server, use the following command:
 
-    ```bash
-        cd frontend/
-        npm install
-        ```
+```bash
+npm run dev
+```
 
-After that you can run it with npm run dev
+---
 
-    ```bash
-        npm run dev
-        ```
+## **Technologies Used**
+- **Frontend**: React.js
+- **Backend**: Firebase
+
+---
+
+Feel free to contribute or raise issues for enhancements! 🎉
+
+--- 
+
+Let me know if you need further edits or additions!
