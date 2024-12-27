@@ -23,6 +23,12 @@ const EditTasks = () => {
 
       try {
         // Reference the Firestore document
+        const user = auth.currentUser;
+        if (!user) {
+          console.warn("No user is signed in. Redirecting to /home.");
+          navigate("/");
+          return;
+        }
         const taskDocRef = doc(db, "Tasks", id);
         const taskDoc = await getDoc(taskDocRef);
 

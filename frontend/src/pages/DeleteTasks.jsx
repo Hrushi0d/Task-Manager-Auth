@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import BackButton from '../components/BackButton'
 import Loading from '../components/Loading';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { doc, deleteDoc} from 'firebase/firestore';
+import { db } from '../../firebase.config';
 
 const DeleteTasks = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
 
-  const HandleDeleteTask = () => {
-    setLoading(true)
-    axios.delete(`http://localhost:5555/api/tasks/${id}`)
-    .then(() => {
-      setLoading(false)
-      navigate('/Home')
-    }).catch((e)=>{
-      setLoading(false)
-      alert("An error occured")
-      console.log(e)
-    })
+  const HandleDeleteTask = async() => {
+    try {
+      setLoading(true);
+      const taskDocRef = doc(db, "Tasks", id);
+      await deleteDoc(taskDocRef);
+      navigate("/Home");
+      console.log(`Document with ID ${id} successfully deleted.`);
+    } catch (error) {
+      console.error("Error deleting task:" + error);
+      alert("An error occurred while deleting the task. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <div className='p-4'>
       <BackButton/>
+      {loading ? (<Loading/>):(
       <div class="flex flex-col items-center justify-center min-h-screen">
         <h1 class="font-bold leading-snug tracking-tight text-slate-800 text-center mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
           Delete Task
@@ -36,7 +40,7 @@ const DeleteTasks = () => {
         onClick={HandleDeleteTask}>
           Delete
         </button>
-      </div>
+      </div>)}
     </div>
     
   )
