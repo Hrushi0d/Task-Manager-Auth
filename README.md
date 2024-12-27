@@ -43,7 +43,7 @@ npm run dev
 ---
 
 ## **Technologies Used**
-- **Frontend**: React.js
+- **Frontend**: React.js, Tailwindcss
 - **Backend**: Firebase
-
+- **Vercel Deployment**: [Task Manager Deployed on Vercel](https://task-manager-auth.vercel.app/)
 ---
