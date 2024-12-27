@@ -2,33 +2,29 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
-import axios from 'axios';
+import { auth } from '../../firebase.config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 
 const RegisterPage = () => {
 
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     
-    const handleSaveUser = () => {
+    const handleSaveUser = async () => {
         setLoading(true)
-        const data = {
-            name,
-            email,
-            password,
-        };
-        axios.post('http://localhost:5555/register', data)
-        .then(()=>{
-          setLoading(false)
-          navigate('/')
-        }).catch((e)=>{
-          setLoading(false)
-          alert("An error occured")
-          console.log(e)
-        })
-    
+        try {
+            const ref = await createUserWithEmailAndPassword(auth, email, password).catch((error) =>{
+                alert(error.message);
+            })
+            console.log(ref);
+            navigate('/')
+        } catch (error) {
+            console.log(error);
+            alert('an error occured')
+        }
     }
 
   return (
@@ -40,15 +36,6 @@ const RegisterPage = () => {
                 <h1 class="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
                     Sign Up
                 </h1>
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Name
-                </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"  
-                type="text" 
-                value={name}
-                onChange={(e) => setName(e.target.value)}/>
-
-
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Email
                 </label>
